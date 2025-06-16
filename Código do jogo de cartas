@@ -1,0 +1,118 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <time.h>
+
+// Estrutura do Digimon
+typedef struct {
+    char nome[50];
+    int ataque;
+    int defesa;
+    int velocidade;
+    int hp;
+} Digimon;
+
+// Baralho de Digimon (exemplos)
+Digimon digimons[10] = {
+    {"Agumon", 70, 50, 60, 100},
+    {"Gabumon", 60, 70, 50, 90},
+    {"Patamon", 40, 60, 80, 80},
+    {"Gatomon", 65, 45, 90, 85},
+    {"Tentomon", 55, 75, 40, 95},
+    {"Palmon", 50, 60, 60, 85},
+    {"Gomamon", 60, 80, 50, 90},
+    {"Veemon", 75, 55, 70, 95},
+    {"Wormmon", 45, 65, 55, 75},
+    {"Hawkmon", 70, 50, 85, 80}
+};
+
+// Função para exibir um Digimon
+void exibirDigimon(Digimon d) {
+    printf("\n--- %s ---\n", d.nome);
+    printf("Ataque: %d\n", d.ataque);
+    printf("Defesa: %d\n", d.defesa);
+    printf("Velocidade: %d\n", d.velocidade);
+    printf("HP: %d\n", d.hp);
+}
+
+// Função principal
+int main() {
+    srand(time(NULL)); // Inicializa a semente aleatória
+
+    Digimon digimonJogador, digimonCPU;
+    int atributo;
+
+    // Sorteia Digimon aleatório para jogador e CPU
+    digimonJogador = digimons[rand() % 10];
+    digimonCPU = digimons[rand() % 10];
+
+    printf("\n=== SUPER TRUNFO DIGIMON ===\n");
+
+    // Exibe o Digimon do jogador
+    printf("\nSeu Digimon:\n");
+    exibirDigimon(digimonJogador);
+
+    // Menu de atributos
+    printf("\nEscolha um atributo para batalhar:\n");
+    printf("1 - Ataque\n");
+    printf("2 - Defesa\n");
+    printf("3 - Velocidade\n");
+    printf("4 - HP\n");
+    scanf("%d", &atributo);
+
+    // Compara os atributos
+    switch (atributo) {
+        case 1:
+            if (digimonJogador.ataque > digimonCPU.ataque) {
+                printf("\nVocê venceu! %s tem Ataque %d vs %d do %s.\n", 
+                    digimonJogador.nome, digimonJogador.ataque, digimonCPU.ataque, digimonCPU.nome);
+            } else if (digimonJogador.ataque < digimonCPU.ataque) {
+                printf("\nCPU venceu! %s tem Ataque %d vs %d do %s.\n", 
+                    digimonCPU.nome, digimonCPU.ataque, digimonJogador.ataque, digimonJogador.nome);
+            } else {
+                printf("\nEmpate em Ataque!\n");
+            }
+            break;
+        case 2:
+            if (digimonJogador.defesa > digimonCPU.defesa) {
+                printf("\nVocê venceu! %s tem Defesa %d vs %d do %s.\n", 
+                    digimonJogador.nome, digimonJogador.defesa, digimonCPU.defesa, digimonCPU.nome);
+            } else if (digimonJogador.defesa < digimonCPU.defesa) {
+                printf("\nCPU venceu! %s tem Defesa %d vs %d do %s.\n", 
+                    digimonCPU.nome, digimonCPU.defesa, digimonJogador.defesa, digimonJogador.nome);
+            } else {
+                printf("\nEmpate em Defesa!\n");
+            }
+            break;
+        case 3:
+            if (digimonJogador.velocidade > digimonCPU.velocidade) {
+                printf("\nVocê venceu! %s tem Velocidade %d vs %d do %s.\n", 
+                    digimonJogador.nome, digimonJogador.velocidade, digimonCPU.velocidade, digimonCPU.nome);
+            } else if (digimonJogador.velocidade < digimonCPU.velocidade) {
+                printf("\nCPU venceu! %s tem Velocidade %d vs %d do %s.\n", 
+                    digimonCPU.nome, digimonCPU.velocidade, digimonJogador.velocidade, digimonJogador.nome);
+            } else {
+                printf("\nEmpate em Velocidade!\n");
+            }
+            break;
+        case 4:
+            if (digimonJogador.hp > digimonCPU.hp) {
+                printf("\nVocê venceu! %s tem HP %d vs %d do %s.\n", 
+                    digimonJogador.nome, digimonJogador.hp, digimonCPU.hp, digimonCPU.nome);
+            } else if (digimonJogador.hp < digimonCPU.hp) {
+                printf("\nCPU venceu! %s tem HP %d vs %d do %s.\n", 
+                    digimonCPU.nome, digimonCPU.hp, digimonJogador.hp, digimonJogador.nome);
+            } else {
+                printf("\nEmpate em HP!\n");
+            }
+            break;
+        default:
+            printf("\nAtributo inválido!\n");
+    }
+
+    // Mostra o Digimon da CPU
+    printf("\nDigimon da CPU:\n");
+    exibirDigimon(digimonCPU);
+
+    return 0;
+}
